@@ -183,9 +183,8 @@ function App() {
           {!showAddUserForm && selectedUser && (
             <div style={{ flex: 1, marginLeft: '10px'}}>
      {/* /         <UserData user={selectedUser} onUpdateUser={handleUpdateUser} onDeleteUser={handleDeleteUser} /> */}
-              <div style={{ border: '2px solid black',  borderRadius: '10px'} }>
-                   <TodoList todos={todos.filter(todo => todo.userId === selectedUser.id).splice(0,5)} onCompleteTodo={handleCompleteTodo} />
-              </div>
+             
+                   <TodoList todos={todos.filter(todo => todo.userId === selectedUser.id).splice(0,5)} onCompleteTodo={handleCompleteTodo} userId={selectedUser.id}/>
               {/* <PostList posts={posts.filter(post => post.userId === selectedUser.id)} /> */}
              </div>
 
@@ -193,7 +192,7 @@ function App() {
       
         {showAddUserForm && (
           <div style={{ flex: 1, paddingLeft: '5px'}}>
-          <div style={{ border: '2px solid black', padding: '10px',  borderRadius: '10px',  borderRadius: '10px'}}>
+          <div style={{ border: '2px solid black', padding: '10px', borderRadius: '10px'}}>
             <div style={{ marginBottom: '5px' }}> {/* Added marginBottom */}
               Name: 
               <input 
