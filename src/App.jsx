@@ -1,76 +1,3 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//   )
-// }
-
-// export default App
-// src/App.js
-// import React, { useState, useEffect } from 'react';
-// import UserList from './components/UserList';
-// import UserData from './components/UserData';
-// import TodoList from './components/TodoList';
-//  import PostList from './components/PostList';
-//  import { fetchUsers, fetchPosts, fetchTodos, markTodoCompleted } from './services/api';
-
-// function App() {
-//   const [users, setUsers] = useState([]);
-//   const [selectedUser, setSelectedUser] = useState(null);
-//   const [todos, setTodos] = useState([]);
-//   const [posts, setPosts] = useState([]);
-
-//   useEffect(() => {
-//     fetchInitialData();
-//   }, []);
-
-//   const fetchInitialData = async () => {
-//     const fetchedUsers = await fetchUsers();
-//     setUsers(fetchedUsers);
-
-//     const fetchedPosts = await fetchPosts();
-//     setPosts(fetchedPosts);
-
-//     const fetchedTodos = await fetchTodos();
-//     setTodos(fetchedTodos);
-//   };
-
-//   const handleSelectUser = (userId) => {
-//     const user = users.find(user => user.id === userId);
-//     setSelectedUser(user);
-//   };
-
-//   const handleCompleteTodo = async (todoId) => {
-//     await markTodoCompleted(todoId);
-//     const updatedTodos = todos.map(todo => {
-//       if (todo.id === todoId) {
-//         return { ...todo, completed: true };
-//       }
-//       return todo;
-//     });
-//     setTodos(updatedTodos);
-//   };
-
-//   return (
-//     <div>
-//       <UserList users={users} onSelectUser={handleSelectUser} />
-//       {selectedUser && (
-//         <>
-//           <UserData user={selectedUser} />
-//           <TodoList todos={todos.filter(todo => todo.userId === selectedUser.id)} onCompleteTodo={handleCompleteTodo} />
-//           <PostList posts={posts.filter(post => post.userId === selectedUser.id)} />
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default App;
-
 // src/App.js
 import React, { useState, useEffect } from 'react';
 import UserList from './components/UserList';
@@ -106,6 +33,7 @@ function App() {
       // Add any other properties you want to include for the new user
     };
   
+    
     // Update the users state by adding the new user to the existing list
     setUsers(prevUsers => [...prevUsers, newUser]);
   
@@ -115,6 +43,12 @@ function App() {
     // Hide the add user form after adding user
     setShowAddUserForm(false);
   };
+  const handleAddTodo = (todo) => {
+    
+    console.log('New todo:', todo);
+    setTodos(prevTodos=> [...prevTodos, todo]);
+    };
+  
 
   useEffect(() => {
     fetchInitialData();
@@ -181,10 +115,8 @@ function App() {
       </div>
       
           {!showAddUserForm && selectedUser && (
-            <div style={{ flex: 1, marginLeft: '10px'}}>
-     {/* /         <UserData user={selectedUser} onUpdateUser={handleUpdateUser} onDeleteUser={handleDeleteUser} /> */}
-             
-                   <TodoList todos={todos.filter(todo => todo.userId === selectedUser.id).splice(0,5)} onCompleteTodo={handleCompleteTodo} userId={selectedUser.id}/>
+            <div style={{ flex: 1, marginLeft: '10px'}}>     
+                   <TodoList todos={todos.filter(todo => todo.userId === selectedUser.id).splice(16)} onAddTodo={handleAddTodo} onCompleteTodo={handleCompleteTodo} userId={selectedUser.id}/>
               {/* <PostList posts={posts.filter(post => post.userId === selectedUser.id)} /> */}
              </div>
 
