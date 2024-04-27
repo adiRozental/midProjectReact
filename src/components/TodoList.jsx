@@ -29,8 +29,8 @@ const TodoList = ({ todos, onCompleteTodo, userId, onAddTodo }) => {
               <h3>Todo List - User {userId} :</h3>
             </div>
           
-            <div style={{flex: 1, margin: '35px'}}>
-              <button  onClick={handleAddTodoClick}>Add</button>
+            <div style={{flex: 1, padding: '25px'}}>
+              <button  onClick={handleAddTodoClick}>Add Task</button>
             </div>  
         </div>  
         <div style={{ border: '2px solid black',  borderRadius: '40px'} }>

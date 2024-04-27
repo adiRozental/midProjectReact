@@ -4,11 +4,12 @@ import UserList from './components/UserList';
 import UserData from './components/UserData';
 import TodoList from './components/TodoList';
 import PostList from './components/PostList';
+import './App.css'
 import { fetchUsers, fetchPosts, fetchTodos, markTodoCompleted } from './services/api';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState('1');
+  const [selectedUserId, setSelectedUserId] = useState('0');
   const [todos, setTodos] = useState([]);
   const [posts, setPosts] = useState([]);
 
@@ -21,9 +22,6 @@ function App() {
   };
 
   const handleAddUser = () => {
-    // Here you can implement the logic to add a new user
-    // You can use props to handle adding new user data to the list
-    // For now, let's just log the new user data to the console
     console.log('New User Name:', newUserName);
     console.log('New User Email:', newUserEmail);
     const newUser = {
@@ -47,6 +45,11 @@ function App() {
     
     console.log('New todo:', todo);
     setTodos(prevTodos=> [...prevTodos, todo]);
+    };
+  const handleAddPost = (post) => {
+  
+    console.log('New post:', post);
+    setPosts(prevPosts=> [...prevPosts, post]);
     };
   
 
@@ -109,25 +112,26 @@ function App() {
       <div style={{ flex: 1 }}>
         
         <div style={{ border: '2px solid black', padding: '10px',  borderRadius: '40px' }}>
-        {/* <button onClick={handleAddUserClick}>Add New User</button> */}
-          <UserList users={users} onAddUser = {handleAddUserClick} onSelectUser={handleSelectUser} onUpdateUser={handleUpdateUser} onDeleteUser={handleDeleteUser}/>
+        
+          <UserList users={users} selectedUser ={selectedUserId} onAddUser = {handleAddUserClick} onSelectUser={handleSelectUser} onUpdateUser={handleUpdateUser} onDeleteUser={handleDeleteUser}/>
         </div>
       </div>
       
           {!showAddUserForm && selectedUser && (
             <div style={{ flex: 1, marginLeft: '10px'}}>     
                    <TodoList todos={todos.filter(todo => todo.userId === selectedUser.id).splice(16)} onAddTodo={handleAddTodo} onCompleteTodo={handleCompleteTodo} userId={selectedUser.id}/>
-              {/* <PostList posts={posts.filter(post => post.userId === selectedUser.id)} /> */}
+                   <PostList posts={posts.filter(post => post.userId === selectedUser.id).splice(6)} onAddPost={handleAddPost}  userId={selectedUser.id}/>
              </div>
 
           )}
       
         {showAddUserForm && (
-          <div style={{ flex: 1, paddingLeft: '5px'}}>
+          <div style={{ flex: 1, paddingLeft: '5px', margin:'10px'}}>
+            <h3>New User:</h3>
           <div style={{ border: '2px solid black', padding: '10px', borderRadius: '10px'}}>
             <div style={{ marginBottom: '5px' }}> {/* Added marginBottom */}
               Name: 
-              <input 
+              <input  style={{ marginLeft: '10px' }}
                 type="text" 
                 placeholder="Name" 
                 value={newUserName} 
@@ -136,7 +140,7 @@ function App() {
             </div>
             <div style={{ marginBottom: '10px' }}> {/* Added marginBottom */}
               Email: 
-              <input 
+              <input style={{ marginLeft: '10px' }}
                 type="email" 
                 placeholder="Email" 
                 value={newUserEmail} 

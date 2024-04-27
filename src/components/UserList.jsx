@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import UserData from './UserData';
 
-const UserList = ({ users, onAddUser, onUpdateUser, onDeleteUser, onSelectUser }) => {
+
+const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, onSelectUser }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchChange = (event) => {
@@ -26,7 +27,7 @@ const UserList = ({ users, onAddUser, onUpdateUser, onDeleteUser, onSelectUser }
           />
         </div>
         
-        <div style={{flex: 1, padding: '10px'}}>
+        <div style={{flex: 1, padding: '8px'}}>
           <button  onClick={onAddUser}>Add User</button>
         </div>  
           
@@ -38,6 +39,7 @@ const UserList = ({ users, onAddUser, onUpdateUser, onDeleteUser, onSelectUser }
           onSelectUser = { onSelectUser}
           onUpdateUser={onUpdateUser} 
           onDeleteUser={onDeleteUser} 
+          selectedUser = {selectedUser}
         />
       ))}
     </div>
