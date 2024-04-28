@@ -5,6 +5,13 @@ input{
 
 button {
   margin: 3px;
-  padding: 6px 14px; /* Adjust padding to increase button size */
-  font-size: 15px; /* Adjust font size to increase button size */
+   padding: 6px 14px; /* Adjust padding to increase button size  */
+  font-size: 15px; 
+  border-radius: 10px;
+  border-width: 1.2px;
+  color: #420000;
+  cursor: pointer;
+  background-color: #f8eee6;
 }
+
+

@@ -54,7 +54,7 @@ function App() {
   
 
   useEffect(() => {
-    fetchInitialData();
+     fetchInitialData();
   }, []);
 
   const fetchInitialData = async () => {
@@ -113,7 +113,7 @@ function App() {
         
         <div style={{ border: '2px solid black', padding: '10px',  borderRadius: '40px' }}>
         
-          <UserList users={users} selectedUser ={selectedUserId} onAddUser = {handleAddUserClick} onSelectUser={handleSelectUser} onUpdateUser={handleUpdateUser} onDeleteUser={handleDeleteUser}/>
+          <UserList users={users} selectedUser ={selectedUserId} onAddUser = {handleAddUserClick} onSelectUser={handleSelectUser} onUpdateUser={handleUpdateUser} onDeleteUser={handleDeleteUser} todos={todos}/>
         </div>
       </div>
       

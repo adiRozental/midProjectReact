@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import UserData from './UserData';
 
 
-const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, onSelectUser }) => {
+const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, onSelectUser, todos }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchChange = (event) => {
@@ -17,7 +17,7 @@ const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, 
 
   return (
     <div>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex',  position: 'relative' }}>
         <div style={{flex: 3, padding: '10px'}}>
           Search: <input style={{flex:1}}
             type="text" 
@@ -27,7 +27,8 @@ const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, 
           />
         </div>
         
-        <div style={{flex: 1, padding: '8px'}}>
+        <div style={{flex: 1, padding: '8px', position: 'absolute',
+    right: '20px'}}>
           <button  onClick={onAddUser}>Add User</button>
         </div>  
           
@@ -36,10 +37,11 @@ const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, 
         <UserData 
           key={user.id} 
           user={user} 
-          onSelectUser = { onSelectUser}
+          todos={todos.filter(todo => todo.userId === user.id)}
+          onSelectUser={onSelectUser}
           onUpdateUser={onUpdateUser} 
           onDeleteUser={onDeleteUser} 
-          selectedUser = {selectedUser}
+          selectedUser={selectedUser}
         />
       ))}
     </div>
