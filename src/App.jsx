@@ -1,11 +1,21 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import UserList from './components/UserList';
 import UserData from './components/UserData';
 import TodoList from './components/TodoList';
 import PostList from './components/PostList';
 import './App.css'
-import { fetchUsers, fetchPosts, fetchTodos, markTodoCompleted } from './services/api';
+import { 
+  fetchUsers, 
+  fetchPosts, 
+  fetchTodos, 
+  markTodoCompleted, 
+  updateUser, 
+  deleteUser, 
+  addPost, 
+  addTodo,
+  addUser
+} from './services/api';
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -13,44 +23,38 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [posts, setPosts] = useState([]);
 
-  const [showAddUserForm, setShowAddUserForm] = useState(false); // State to control the visibility of the add user form
+  const [showAddUserForm, setShowAddUserForm] = useState(false); 
   const [newUserName, setNewUserName] = useState('');
   const [newUserEmail, setNewUserEmail] = useState('');
 
   const handleAddUserClick = () => {
-    setShowAddUserForm(true); // Show the add user form when the button is clicked
+    setShowAddUserForm(true); 
   };
 
-  const handleAddUser = () => {
-    console.log('New User Name:', newUserName);
-    console.log('New User Email:', newUserEmail);
+  const handleAddUser = async () => {
     const newUser = {
       id: users.length +1000+ 1, // Assign a unique ID (assuming IDs are sequential)
       name: newUserName,
       email: newUserEmail,
-      // Add any other properties you want to include for the new user
     };
   
-    
-    // Update the users state by adding the new user to the existing list
     setUsers(prevUsers => [...prevUsers, newUser]);
-  
+    await addUser(newUser);
     // Clear input fields after adding user
     setNewUserName('');
     setNewUserEmail('');
-    // Hide the add user form after adding user
     setShowAddUserForm(false);
   };
-  const handleAddTodo = (todo) => {
-    
-    console.log('New todo:', todo);
+
+  const handleAddTodo = async (todo) => {
+    await addTodo(todo);
     setTodos(prevTodos=> [...prevTodos, todo]);
-    };
-  const handleAddPost = (post) => {
-  
-    console.log('New post:', post);
+  };
+
+  const handleAddPost = async (post) => {
+    await addPost(post);
     setPosts(prevPosts=> [...prevPosts, post]);
-    };
+  };
   
 
   useEffect(() => {
@@ -73,8 +77,6 @@ function App() {
   };
 
   const handleUpdateUser = async (userId, updatedUserData) => {
-    // Update user data
-    // You need to implement the logic for updating user data
     setUsers(prevUsers => {
       return prevUsers.map(user => {
         if (user.id === userId) {
@@ -83,14 +85,13 @@ function App() {
         return user;
       });
     });
-    console.log("Updating user data:", userId, updatedUserData);
+    await updateUser(updatedUserData);
   };
 
-  const handleDeleteUser = (userId) => {
-    // Filter out the user with the specified userId
+  const handleDeleteUser = async (userId) => {
     const updatedUsers = users.filter(user => user.id !== userId);
-    // Update the users state with the filtered list
     setUsers(updatedUsers);
+    await deleteUser(userId);
   };
   
 
