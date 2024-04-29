@@ -1,37 +1,17 @@
-// // src/components/PostList.js
-// import React from 'react';
-
-// const PostList = ({ posts }) => {
-//   return (
-//     <div>
-//       <h2>Post List</h2>
-//       <ul>
-//         {posts.map(post => (
-//           <li key={post.id}>
-//             <strong>{post.title}</strong>
-//             <p>{post.body}</p>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// src/components/TodoList.js
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
 
-const PostList = ({ posts, userId, onAddPost }) => {
-  console.log("posts", posts)
+export default function PostList ({ posts, userId, onAddPost }) {
   const [showAddPostForm, setshowAddPostForm] = useState(false); 
   const [newPost, setNewPost] = useState(); 
   const [newBody, setNewBody] = useState(); 
 
   const handleAddPostClick = () => {
-    setshowAddPostForm(true); // Show the add user form when the button is clicked
+    setshowAddPostForm(true); 
   };
+
   const handleAddPost = () => {
-    setshowAddPostForm(false); // Show the add user form when the button is clicked
+    setshowAddPostForm(false); 
     const post = { id: posts.length+100, userId: userId ,title: newPost, body: newBody };
     onAddPost(post);
     setNewPost("");
@@ -50,18 +30,14 @@ const PostList = ({ posts, userId, onAddPost }) => {
               <h3>Post List - User {userId} :</h3>
             </div>
           
-            <div style={{flex: 1, padding: '25px'}}>
+            <div style={{flex: 1, padding: '20px'}}>
               <button  onClick={handleAddPostClick}>Add Post</button>
             </div>  
         </div>  
-        <div style={{ border: '2px solid black',  borderRadius: '40px'} }>
-          <ul>
+        <div style={{ border: '2px solid black',  borderRadius: '40px', padding: '20px', paddingRight:'0px'} }>
             {posts.map(post => (
-              <li key={post.id}>
                 <Post post={post} />
-              </li>
             ))}
-          </ul>
         </div>
         </div>
           )}
@@ -100,5 +76,4 @@ const PostList = ({ posts, userId, onAddPost }) => {
   );
 };
 
-export default PostList;
 

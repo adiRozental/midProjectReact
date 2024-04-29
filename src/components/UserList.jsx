@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import UserData from './UserData';
 
 
-const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, onSelectUser, todos }) => {
+export default function UserList ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, onSelectUser, todos }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchChange = (event) => {
@@ -48,4 +48,3 @@ const UserList = ({ users, selectedUser, onAddUser, onUpdateUser, onDeleteUser, 
   );
 };
 
-export default UserList;

@@ -1,18 +1,18 @@
-// src/components/TodoList.js
 import React, { useState, useEffect } from 'react';
 import Todo from './Todo';
 
-const TodoList = ({ todos, onCompleteTodo, userId, onAddTodo }) => {
-  console.log("whattt", todos)
+export default function TodoList ({ todos, onCompleteTodo, userId, onAddTodo })
+{
   const [showAddtodoForm, setshowAddtodoForm] = useState(false); 
   const [newTodo, setNewTodo] = useState(); 
 
-  const handleAddTodoClick = () => {
+
+ const handleAddTodoClick = () => {
     setshowAddtodoForm(true); // Show the add user form when the button is clicked
   };
   const handleAddTodo = () => {
     setshowAddtodoForm(false); // Show the add user form when the button is clicked
-    const todo = { id: todos.length+100, userId: userId ,title: newTodo };
+    const todo = { id: todos.length+100, userId: userId ,title: newTodo, completed: false};
     onAddTodo(todo);
     setNewTodo("");
 
@@ -33,14 +33,10 @@ const TodoList = ({ todos, onCompleteTodo, userId, onAddTodo }) => {
               <button  onClick={handleAddTodoClick}>Add Task</button>
             </div>  
         </div>  
-        <div style={{ border: '2px solid black',  borderRadius: '40px'} }>
-          <ul>
+        <div style={{ border: '2px solid black',  borderRadius: '40px', padding: '20px', paddingRight:'0px'} }>
             {todos.map(todo => (
-              <li key={todo.id}>
                 <Todo todo={todo} onCompleteTodo={onCompleteTodo} />
-              </li>
             ))}
-          </ul>
         </div>
         </div>
           )}
@@ -49,7 +45,7 @@ const TodoList = ({ todos, onCompleteTodo, userId, onAddTodo }) => {
           <h3>New Task - User {userId} :</h3>
 
           <div style={{ border: '2px solid black', padding: '10px', borderRadius: '10px'}}>
-            <div style={{ marginBottom: '5px' }}> {/* Added marginBottom */}
+            <div style={{ marginBottom: '5px' }}> 
               Todo: 
               <input 
                 type="text" 
@@ -71,5 +67,3 @@ const TodoList = ({ todos, onCompleteTodo, userId, onAddTodo }) => {
     </div>
   );
 };
-
-export default TodoList;

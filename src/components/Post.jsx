@@ -1,10 +1,11 @@
 // src/components/Todo.jsx #c6def1
 import React from 'react';
 
-const Post = ({ post }) => {
+export default function Post({ post })
+{
   return (
     <div style={{ 
-        border:  '2px solid #9ea1d4', 
+        border:  '2px solid pink',  //##9ea1d4
         padding: '10px', 
         marginRight: '20px', marginTop: '10px' , borderRadius: '10px'
       }} >        
@@ -15,4 +16,3 @@ const Post = ({ post }) => {
   );
 };
 
-export default Post;

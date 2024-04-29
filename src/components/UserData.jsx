@@ -3,47 +3,30 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const UserData = ({ user,todos, selectedUser, onUpdateUser, onDeleteUser, onSelectUser}) => {
+export default function UserData ({ user,todos, selectedUser, onUpdateUser, onDeleteUser, onSelectUser})
+{
   const [showMoreData, setShowMoreData] = useState(false);
   const [editedName, setEditedName] = useState(user.name);
   const [editedEmail, setEditedEmail] = useState(user.email);
   const [uncompletedTodos, setuncompletedTodos] = useState(true);
 
   useEffect(() => {
-    console.log('hey', todos);
-    setuncompletedTodos(false)
-    todos.splice(16).forEach(todo => { if (todo.completed == false) setuncompletedTodos(true); 
-      
-    });
-    console.log(uncompletedTodos)
+      if(user.id  > 10 ){
+        const hasUncompletedTodos = todos.some(todo => !todo.completed);
+      setuncompletedTodos(hasUncompletedTodos);
+      }
+      else{
+      const todosFromIndex16 = todos.slice(16);
+      const hasUncompletedTodos = todosFromIndex16.some(todo => !todo.completed);
+      setuncompletedTodos(hasUncompletedTodos);}
   }, [todos]);
 
    const handleUpdateUser = () => {
-        axios.patch(`https://jsonplaceholder.typicode.com/users/${user.id}`, {
-          name: editedName,
-          email: editedEmail
-        }).then(response => {
-          // Handle successful update here
-        //   onUpdateUser(response.data); // Assuming onUpdateUser function updates the user state
-          console.log('User updated successfully');
-        }).catch(error => {
-          // Handle update error here
-          console.error('Error updating user:', error);
-        });
         const updatedData = { name: editedName, email: editedEmail }; // Example updated data
         onUpdateUser(user.id, updatedData);
        };
       
    const handleDeleteUser = () => {
-        axios.delete(`https://jsonplaceholder.typicode.com/users/${user.id}`)
-        .then(() => {
-          // Handle successful deletion here
-        //   onDeleteUser(user.id); // Assuming onDeleteUser function deletes the user from state
-          console.log('User deleted successfully');
-        }).catch(error => {
-          // Handle deletion error here
-          console.error('Error deleting user:', error);
-        });
         onDeleteUser(user.id);
      };
 
@@ -72,7 +55,6 @@ const UserData = ({ user,todos, selectedUser, onUpdateUser, onDeleteUser, onSele
       }} 
       
     >
-      {/* <h5>{user.name}</h5>  */}
       <div>
         <label onClick={handleSelected}>ID:</label> <span>{user.id}</span>
       </div>
@@ -99,7 +81,7 @@ const UserData = ({ user,todos, selectedUser, onUpdateUser, onDeleteUser, onSele
       <div style={{
     bottom: '10px',
     right: '20px'}} >
-      <button onMouseEnter={handleToggleMoreData} onClick={handleToggleMoreData2}>show more data</button>
+      <button onMouseEnter={handleToggleMoreData} onClick={handleToggleMoreData2}> {!showMoreData ? 'Show more data' : 'Hide data'}</button>
       <button onClick={handleUpdateUser}>Update</button>
       <button onClick={handleDeleteUser}>Delete</button>  
       </div>
@@ -108,5 +90,4 @@ const UserData = ({ user,todos, selectedUser, onUpdateUser, onDeleteUser, onSele
   );
 };
 
-export default UserData;
 

@@ -1,7 +1,7 @@
-// src/components/Todo.jsx
 import React from 'react';
 
-const Todo = ({ todo, onCompleteTodo }) => {
+export default function Todo ({ todo, onCompleteTodo })
+{
   return (
     <div style={{ 
         border:  '2px solid pink', 
@@ -20,4 +20,3 @@ const Todo = ({ todo, onCompleteTodo }) => {
   );
 };
 
-export default Todo;
