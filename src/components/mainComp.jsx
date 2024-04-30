@@ -13,7 +13,7 @@ import {
   addPost, 
   addTodo,
   addUser
-} from '../services/api';
+} from '../services/utils';
 
 
 export default function MainComp() {
